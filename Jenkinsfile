@@ -15,7 +15,7 @@ pipeline {
       steps {
         sh '''
           java -version
-          sh 'chmod +x ./bld'
+          sh 'chmod +x /var/lib/jenkins/workspace/jenkins-tomcat-war/bld'
           ./bld version
         '''
       }
