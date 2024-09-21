@@ -15,6 +15,7 @@ pipeline {
       steps {
         sh '''
           java -version
+          sh 'chmod +x ./bld'
           ./bld version
         '''
       }
