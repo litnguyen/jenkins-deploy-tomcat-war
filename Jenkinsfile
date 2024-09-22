@@ -14,6 +14,7 @@ pipeline {
     stage('verify tooling') {
       steps {
         sh '''
+          chmod +x ./bld
           java -version
           ./bld version
         '''
