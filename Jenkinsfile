@@ -48,6 +48,8 @@ pipeline {
     stage('copy the war file to the Tomcat server') {
       steps {
         sh '''
+          echo "Using credentials file: $TOMCAT_CREDS"
+          echo "Connecting to server: $TOMCAT_CREDS_USR@$TOMCAT_SERVER"
           ssh -i $TOMCAT_CREDS $TOMCAT_CREDS_USR@$TOMCAT_SERVER "/opt/tomcat/bin/catalina.sh stop"
           ssh -i $TOMCAT_CREDS $TOMCAT_CREDS_USR@$TOMCAT_SERVER "rm -rf $ROOT_WAR_LOCATION/ROOT; rm -f $ROOT_WAR_LOCATION/ROOT.war"
           scp -i $TOMCAT_CREDS $LOCAL_WAR_DIR/$WAR_FILE $TOMCAT_CREDS_USR@$TOMCAT_SERVER:$ROOT_WAR_LOCATION/ROOT.war
