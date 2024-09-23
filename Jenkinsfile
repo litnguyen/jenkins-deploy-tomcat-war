@@ -47,12 +47,10 @@ pipeline {
     // }  
     stage('copy the war file to the Tomcat server') {
       steps {
-        scripts {
-          sshagent(['tomCreds20']) {
-            sh '''
-            ssh -o StrictHostKeyChecking=no $TOMCAT_CREDS_USR@$TOMCAT_SERVER "echo login_successfull"
-            '''
-          }
+        sshagent(['tomCreds20']) {
+          sh '''
+          ssh -o StrictHostKeyChecking=no $TOMCAT_CREDS_USR@$TOMCAT_SERVER "echo login_successfull"
+          '''
         }
       }
     }
