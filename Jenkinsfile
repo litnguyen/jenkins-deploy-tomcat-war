@@ -47,11 +47,13 @@ pipeline {
     // }  
     stage('copy the war file to the Tomcat server') {
       steps {
-        sh '''
-          echo "Using credentials file: $TOMCAT_CREDS"
-          echo "Connecting to server: $TOMCAT_CREDS_USR@$TOMCAT_SERVER"
-          ssh -o StrictHostKeyChecking=no -p 22 -i $TOMCAT_CREDS $TOMCAT_CREDS_USR@$TOMCAT_SERVER "echo login_successfull"
-        '''
+        scripts {
+          sshagent(['tomCreds20']) {
+            sh '''
+            ssh -o StrictHostKeyChecking=no $TOMCAT_CREDS_USR@$TOMCAT_SERVER "echo login_successfull"
+            '''
+          }
+        }
       }
     }
   }
