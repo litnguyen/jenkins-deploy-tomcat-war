@@ -50,7 +50,7 @@ pipeline {
         sh '''
           echo "Using credentials file: $TOMCAT_CREDS"
           echo "Connecting to server: $TOMCAT_CREDS_USR@$TOMCAT_SERVER"
-          ssh -o StrictHostKeyChecking=no -p 22 -i $TOMCAT_CREDS $TOMCAT_CREDS_USR@$TOMCAT_SERVER "ls -lart /opt/tomcat/bin"
+          ssh -o StrictHostKeyChecking=no -p 22 -i $TOMCAT_CREDS $TOMCAT_CREDS_USR@$TOMCAT_SERVER "ls -lart /opt"
           ssh -i $TOMCAT_CREDS $TOMCAT_CREDS_USR@$TOMCAT_SERVER "rm -rf $ROOT_WAR_LOCATION/ROOT; rm -f $ROOT_WAR_LOCATION/ROOT.war"
           scp -i $TOMCAT_CREDS $LOCAL_WAR_DIR/$WAR_FILE $TOMCAT_CREDS_USR@$TOMCAT_SERVER:$ROOT_WAR_LOCATION/ROOT.war
           ssh -i $TOMCAT_CREDS $TOMCAT_CREDS_USR@$TOMCAT_SERVER "chown $TOMCAT_CREDS_USR:$TOMCAT_CREDS_USR $ROOT_WAR_LOCATION/ROOT.war"
